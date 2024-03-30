@@ -17,7 +17,15 @@ public class PostRepository {
     }
 
     public Post save(Post post) {
-        return post;
+        long id = post.getId();
+        int count = 0;
+        if (id == 0) {
+            count++;
+            id = count;
+            return post;
+        } else {
+            return post;
+        }
     }
 
     public void removeById(long id) {
