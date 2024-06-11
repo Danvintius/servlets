@@ -3,20 +3,28 @@ package ru.netology.repository;
 import ru.netology.exception.NotFoundException;
 import ru.netology.model.Post;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 // Stub
 public class PostRepository {
-    private static final ConcurrentHashMap<Long, Post> postMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Long, Post> postMap = new ConcurrentHashMap<>();
     public List<Post> all() {
-        return Collections.emptyList();
+        if (postMap.isEmpty()) {
+            throw new NotFoundException("Список постов пуст");
+        }
+        List<Post> data = new ArrayList<>();
+        for (Map.Entry<Long, Post> entry : postMap.entrySet()) {
+            data.add(entry.getValue());
+        }
+        return data;
     }
 
     public Optional<Post> getById(long id) {
-        return Optional.empty();
+        if (postMap.containsKey(id)) {
+            return Optional.ofNullable(postMap.get(id));
+        }
+        throw new NotFoundException("Неверный ID поста");
     }
 
     public Post save(Post post) {
