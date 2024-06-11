@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class Post {
     private long id;
     private String content;
-    private AtomicLong idCounter;
+    private AtomicLong idCounter = new AtomicLong(0);
     public Post() {
     }
 
