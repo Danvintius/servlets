@@ -5,10 +5,12 @@ import ru.netology.model.Post;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 // Stub
 public class PostRepository {
     private final ConcurrentHashMap<Long, Post> postMap = new ConcurrentHashMap<>();
+    private AtomicLong idCounter = new AtomicLong(0);
     public List<Post> all() {
         if (postMap.isEmpty()) {
             throw new NotFoundException("Список постов пуст");
@@ -28,9 +30,11 @@ public class PostRepository {
     }
 
     public Post save(Post post) {
+        long id;
         if (postMap.containsKey(post.getId())) {
             postMap.put(post.getId(), post);
         } else {
+            id = idCounter.getAndIncrement();
             Post newPost = new Post(post.getContent());
             postMap.put(newPost.getId(), newPost);
             return newPost;
@@ -39,8 +43,8 @@ public class PostRepository {
     }
 
     public void removeById(long id) {
-        if (posts.containsKey(id)) {
-            posts.remove(id);
+        if (postMap.containsKey(id)) {
+            postMap.remove(id);
         } else {
             throw new NotFoundException("Не найден элемент с id - " + id);
         }

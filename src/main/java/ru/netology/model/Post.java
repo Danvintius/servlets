@@ -3,16 +3,12 @@ package ru.netology.model;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Post {
-    private long id;
+    private AtomicLong id;
     private String content;
-    private AtomicLong idCounter = new AtomicLong(0);
+
     public Post() {
     }
 
-    public Post(long id, String content) {
-        this.id = idCounter.getAndIncrement();
-        this.content = content;
-    }
 
     public Post(String content) {
 
