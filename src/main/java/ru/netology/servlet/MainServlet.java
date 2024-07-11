@@ -7,6 +7,7 @@ import ru.netology.service.PostService;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ru.netology.config.Config;
 
 public class MainServlet extends HttpServlet {
     private PostController controller;
