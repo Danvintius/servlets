@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Repository
 public class PostRepository {
     private final ConcurrentHashMap<Long, Post> postMap = new ConcurrentHashMap<>();
     private AtomicLong idCounter = new AtomicLong(0);
